@@ -1,24 +1,35 @@
-# README
+＃テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+|Column                 |Type          |Options                     |
+|-----------------------|--------------|----------------------------|
+|nickname               |string        |null:false                  |
+|email                  |string        |null:false                  |
+|password               |string        |null:false                  |
+|name                   |string        |null:false                  |
+|date of birth          |string        |null:false                  |
 
-* Ruby version
+## items テーブル
 
-* System dependencies
+|Column                  |Type          |Options                     |
+|------------------------|--------------|----------------------------|
+|img-upload              |string        |null:false                  |
+|new-items               |string        |null:false                  |
+|items_explain           |text          |null:false                  |
+|items-detail            |text          |null:false                  |
+|sell-price              |string        |null:false                  |
 
-* Configuration
+##　 items-sell-contents
+|Column                  |Type          |Options                     |
+|------------------------|--------------|----------------------------|
+|img-upload              |string        |null:false                  |
+|items-price             |string        |null:false                  |
+｜item-postage            |string       |null:fase                   |
+|detail-item              |string       |null:false                  |
+|item-explain-box         |string       |null:false                  |
+|comment-box              |text         |                           |
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## items-delivery
+|Column                   |Type          |Options                     |
+|
