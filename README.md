@@ -5,31 +5,32 @@
 |Column                 |Type          |Options                     |
 |-----------------------|--------------|----------------------------|
 |nickname               |string        |null:false                  |
-|email                  |string        |null:false                  |
-|password               |string        |null:false                  |
-|re-enter-password      |string        |null:false                  |
-|name                   |string        |null:false                  |
-|kana                   |string        |null:false                  |
-|date of birth          |string        |null:false                  |
+|email                  |string        |null:false, unique:true     |
+|encrypted-password     |string        |null:false                  |
+|family-name            |string        |null:false                  |
+|first-name             |string        |null:false                  |
+|kana-family-name       |string        |null:false                  |
+|kana-first-name        |string        |null:false                  |
+|date of birth          |date          |null:false                  |
 
 ## items テーブル
 
 |Column                  |Type          |Options                     |
 |------------------------|--------------|----------------------------|
-|img-upload              |string        |null:false                  |
 |new-items               |text          |null:false                  |
 |items-explain           |text          |null:false                  |
 |items-category          |text          |null:false                  |
 |items-sales-status      |text          |null:false                  |
 |items-postage           |string        |null:false                  |
-|sell-price              |string        |null:false                  |
+|delivery-place          |string        |null:false                  |
+|shipping-date           |string        |null:false                  |
+|sell-price              |integer       |null:false                  |
 
 ##　 items-purchase-contents
 |Column                  |Type          |Options                     |
 |------------------------|--------------|----------------------------|
 |new-items               |text          |null:false                  |
-|img-upload              |string        |null:false                  |
-|items-price             |string        |null:false                  |
+|items-price             |integer       |null:false                  |
 |items-postage           |string        |null:fase                   |
 |items-saler             |string        |null:false                  |
 |items-category          |string        |null:false                  |
@@ -43,8 +44,7 @@
 |Column                   |Type          |Options                    |
 |-------------------------|--------------|---------------------------|
 |new-items                |string        |null:false                 |
-|img-upload               |string        |null:false                 |
-|items-price              |string        |null:false                 |
+|items-price              |integer        |null:false                 |
 |items-postage            |string        |null:false                 |
 |credit-card-info         |string        |null:false                 |
 |date-of-expire           |text          |null:false                 |
