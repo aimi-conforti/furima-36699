@@ -1,24 +1,65 @@
-# README
+＃テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## user テーブル
 
-Things you may want to cover:
+|Column                 |Type                |Options                     |
+|-----------------------|--------------------|----------------------------|
+|nickname               |string              |null:false                  |
+|email                  |string              |null:false, unique:true     |
+|encrypted_password     |string              |null:false                  |
+|family_name            |string              |null:false                  |
+|first_name             |string              |null:false                  |
+|kana_family_name       |string              |null:false                  |
+|kana_first_name        |string              |null:false                  |
+|date_of_birth          |date                |null:false                  |
 
-* Ruby version
+###Association
 
-* System dependencies
+- has_many : items
+- has_many : items_purchase_contents
 
-* Configuration
+## items テーブル
 
-* Database creation
+|Column                  |Type               |Options                     |
+|------------------------|-------------------|----------------------------|
+|user                    |references         |null:false,foreign_key:true |
+|new_items               |string             |null:false            |
+|items_explain           |text               |null:false                  |
+|category_id             |integer            |null:false                  |
+|sales_status_id         |integer            |null:false                  |
+|postage_id              |integer            |null:false                  |
+|prefecture_id           |integer            |null:false                  |
+|shipping_date_id        |integer            |null:false                  |
+|sell_price              |integer            |null:false                  |
 
-* Database initialization
+###Association
 
-* How to run the test suite
+- belongs_to : user
+- has_one  : item_purchase_contents
 
-* Services (job queues, cache servers, search engines, etc.)
+##　 item_purchase_contents
+|Column                  |Type               |Options                     |
+|------------------------|-------------------|----------------------------|
+|item                    |references         |null:false, foreign_key:true|
+|user                    |references         |null:false, foreign_key:true|
 
-* Deployment instructions
+###Association
 
-* ...
+- belongs_to :user
+- belongs_to :item
+- has_one :item_delivery_content
+
+## item_delivery_contents
+|Column                   |Type              |Options                     |
+|-------------------------|------------------|----------------------------|
+|post_code                |string            |null:false                  |
+|prefecture_id            |integer           |null:false                  |
+|city                     |string            |null:false                  |
+|town_number              |string            |null:false                  |
+|buildings_name           |string            |                            |
+|phone_number             |string            |null:false                  |
+|item_purchase_content    |references        |null:false, foreign_key:true|
+
+###Association
+
+-belongs_to: item_purchase_content
