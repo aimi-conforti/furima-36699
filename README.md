@@ -6,32 +6,32 @@
 |-----------------------|--------------|----------------------------|
 |nickname               |string        |null:false                  |
 |email                  |string        |null:false, unique:true     |
-|encrypted-password     |string        |null:false                  |
-|family-name            |string        |null:false                  |
-|first-name             |string        |null:false                  |
-|kana-family-name       |string        |null:false                  |
-|kana-first-name        |string        |null:false                  |
+|encrypted_password     |string        |null:false                  |
+|family_name            |string        |null:false                  |
+|first_name             |string        |null:false                  |
+|kana_family_name       |string        |null:false                  |
+|kana_first_name        |string        |null:false                  |
 |date of birth          |date          |null:false                  |
 
 ###Association
 
 - has_many : items
-- has_many : items-purchase-contents
-- has_many : items-delivery-contents
+- has_many : items_purchase_contents
+- has_many : items_delivery_contents
 
 ## items テーブル
 
 |Column                  |Type              |Options                     |
 |------------------------|------------------|----------------------------|
-|id                      |string            |null:false                  |
-|new-items               |string            |null:false                  |
-|items-explain           |text              |null:false                  |
-|genre-id                |collection_select |null:false                  |
-|items-sales-status      |collection_select |null:false                  |
-|items-postage           |collection_select |null:false                  |
-|delivery-place          |collection_select |foreign-key:true            |
-|shipping-date           |collection_select |null:false                  |
-|sell-price              |integer           |null:false                  |
+|use_id                  |references        |null:false,foreign-key:true |
+|new_items               |string            |null:false            |
+|items_explain           |text              |null:false                  |
+|category_id             |integer           |null:false                  |
+|sales_status_id         |integer           |null:false                  |
+|postage_id              |integer           |null:false                  |
+|delivery_place_id       |references        |foreign-key:true            |
+|shipping_date_id        |integer           |null:false                  |
+|sell_price_id           |integer           |null:false                  |
 
 ###Association
 
@@ -41,16 +41,17 @@
 ##　 items-purchase-contents
 |Column                  |Type          |Options                     |
 |------------------------|--------------|----------------------------|
-|new-items               |string        |null:false                  |
-|items-price             |integer       |null:false                  |
-|items-postage           |string        |null:fase                   |
-|items-saler             |string        |null:false                  |
-|items-category          |string        |null:false                  |
-|items-sales-status      |string        |null:false                  |
-|items-postage           |string        |null:false                  |
-|delivery-place          |string        |foreign-key:true            |
-|shipping-date           |string        |null:false                  |
-|comment-box             |text          |                            |
+|new_items               |references    |foreign-key:true            |
+|items_price             |references    |foreign-key:true            |
+|items_postage           |references    |foreign-key:true            |
+|items_saler             |references    |foreign-key:true            |
+|items_category          |references    |foreign-key:true            |
+|items_sales_status      |references    |foreign-key:true            |
+|items_postage           |references    |foreign-key:true            |
+|delivery_place          |references    |foreign-key:true            |
+|shipping_date           |references    |foreign-key:true            |
+|buyer_id                |references    |null:false, foreign-key:true|
+|comment_box             |text          |                            |
 
 ###Association
 
@@ -60,16 +61,18 @@
 ## items-delivery-contents
 |Column                   |Type              |Options                    |
 |-------------------------|------------------|---------------------------|
-|new-items                |string            |null:false                 |
-|items-price              |integer           |null:false                 |
-|items-postage            |string            |null:false                 |
-|total-payment            |integer           |foreign-key:true           |
-|post-code                |string            |null:false                 |
+|new_items                |references        |foreign-key:true           |
+|items_price              |references        |foreign-key:true           |
+|items_postage            |references        |foreign-key:true           |
+|total_payment            |references        |foreign-key:true           |
+|post_code                |string            |null:false                 |
 |prefecture               |collection_select |null:false                 |
 |city                     |string            |null:false                 |
-|town-number              |string            |null:false                 |
-|buildings-name           |string            |                           |
-|phone-number             |string            |null:false                 |
+|town_number              |string            |null:false                 |
+|buildings_name           |string            |                           |
+|phone_number             |string            |null:false                 |
+
+###Association
 
 -belongs_to: users
 -belongs_to: items-purchase-contents
