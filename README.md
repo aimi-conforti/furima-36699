@@ -34,19 +34,20 @@
 
 ###Association
 
-- has_many : users
-- has_one  : items-purchase-content
+- belongs_to : user
+- has_one  : item_purchase_contents
 
 ##　 item_purchase_contents
 |Column                  |Type               |Options                     |
 |------------------------|-------------------|----------------------------|
-|items                   |references         |null:false, foreign_key:true|
+|item                    |references         |null:false, foreign_key:true|
 |user                    |references         |null:false, foreign_key:true|
 
 ###Association
 
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
+- has_one :item_delivery_content
 
 ## item_delivery_contents
 |Column                   |Type              |Options                     |
@@ -57,8 +58,8 @@
 |town_number              |string            |null:false                  |
 |buildings_name           |string            |                            |
 |phone_number             |string            |null:false                  |
-|purchase_history         |references        |null:false, foreign_key:true|
+|item_purchase_content    |references        |null:false, foreign_key:true|
 
 ###Association
 
--belongs_to: user
+-belongs_to: item_purchase_content
