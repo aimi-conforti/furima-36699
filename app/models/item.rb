@@ -16,6 +16,7 @@ class Item < ApplicationRecord
   validates :postage_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_date_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :sell_price, presence: true
 
   def was_attached?
     self.image.was_attached?
