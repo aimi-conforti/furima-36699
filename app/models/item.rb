@@ -7,20 +7,14 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :prefecture
   belongs_to :shipping_date
-  has_one :item_purchase_contents
+  # has_one :item_purchase_contents
   has_one_attached :image
 
-  validates :content, presence: true, unless: :was_attached?
+  validates :new_items, presence: true
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :sales_status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :postage_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_date_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :sell_price, presence: true
-
-  def was_attached?
-    self.image.was_attached?
-  end
-
-
 end
