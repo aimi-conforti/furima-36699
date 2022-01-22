@@ -12,7 +12,7 @@ class Item < ApplicationRecord
 
   validates :image, presence:true
   validates :new_items, presence: true
-  validates :item_explain, presence: true
+  validates :items_explain, presence: true
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :sales_status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :postage_id, numericality: { other_than: 1 , message: "can't be blank"}

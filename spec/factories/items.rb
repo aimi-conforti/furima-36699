@@ -1,14 +1,17 @@
 FactoryBot.define do
   factory :item do
-    user                  {'test1'}
-    image                 {'arrow_top.png'}
     new_items             {'商品'}
     items_explain         {'新商品'}
-    category_id           {'メンズ'}
-    sales_status_id       {'新品・未使用'}
-    postage_id            {'着払い（購入者負担）'}
-    prefecture_id         {'北海道'}
-    shipping_date_id      {'1~2日で発送'}
+    category_id           {2}
+    sales_status_id       {2}
+    postage_id            {2}
+    prefecture_id         {2}
+    shipping_date_id      {2}
     sell_price            {300}
+    
+    association :user
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
   end
 end
