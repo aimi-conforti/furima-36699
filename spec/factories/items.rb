@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :item do
+    user                  {'test1'}
+    image                 {'arrow_top.png'}
     new_items             {'商品'}
     items_explain         {'新商品'}
     category_id           {'メンズ'}

@@ -10,11 +10,13 @@ class Item < ApplicationRecord
   # has_one :item_purchase_contents
   has_one_attached :image
 
+  validates :image, presence:true
   validates :new_items, presence: true
+  validates :item_explain, presence: true
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :sales_status_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :postage_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_date_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :sell_price, presence: true
+  validates :sell_price, numericality: { only_integer:true, greater_than_or_equal_to:300, less_than: 9999999 }
 end
