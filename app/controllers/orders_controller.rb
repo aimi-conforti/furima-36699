@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :prevent_url, only: [:index, :create]
 
   def index
     @order_address = OrderAddress.new
@@ -17,6 +18,9 @@ class OrdersController < ApplicationController
      end
   end
 
+  def show
+  end
+
   private
 
   def order_params
@@ -25,6 +29,12 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def prevent_url
+    if @item.user_id == current_user.id || @item.order != nil
+      redirect_to root_path
+    end
   end
 
   def pay_item
