@@ -4,7 +4,8 @@ RSpec.describe OrderAddress, type: :model do
   describe '商品購入' do
     before do
       user = FactoryBot.create(:user)
-      @order_address = FactoryBot.build(:order_address, user_id: user.id)
+      item = FactoryBot.create(:item)
+      @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
     end
 
     context '内容に問題ない場合' do
@@ -22,6 +23,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "ユーザーが紐づいていなければ投稿できない" do
+        @order_address.user = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User must exist")
+      end
+      it "できないこと" do
+        @order_address.item = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item must exist")
       end
       it 'post_codeが空だと保存できないこと' do
         @order_address.post_code = ''
@@ -53,8 +64,18 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberは、10桁以上11桁以内の半角数値のみ保存できないこと' do
-        @order_address.phone_number = '090-1234-5678'
+      it 'phone_numberに半角数値以外が入力された時は登録出来ない' do
+        @order_address.phone_number = '０９０−１２３４ー５６７８'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'Phone_numberは9桁以下の場合登録できない' do
+        @order_address.phone_number = '090-1234'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberは12桁以上の場合登録できない' do
+        @order_address.phone_number = '090-12345-67890'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
