@@ -24,12 +24,12 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
-      it "ユーザーが紐づいていなければ投稿できない" do
+      it "ユーザーが紐づいていなければ購入できない" do
         @order_address.user = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("User must exist")
       end
-      it "できないこと" do
+      it "商品が紐づいていなければ購入できないこと" do
         @order_address.item = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Item must exist")
@@ -45,7 +45,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Post code is invalid")
       end
       it 'prefectureを選択していないと保存できないこと' do
-        @order_address.prefecture_id = [1]
+        @order_address.prefecture_id = 1
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
       end
