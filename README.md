@@ -16,7 +16,7 @@
 ###Association
 
 - has_many : items
-- has_many : items_purchase_contents
+- has_many : orders
 
 ## items テーブル
 
@@ -35,21 +35,21 @@
 ###Association
 
 - belongs_to : user
-- has_one  : item_purchase_contents
+- has_one  : order
 
-##　 item_purchase_contents
+##　 orders テーブル
 |Column                  |Type               |Options                     |
 |------------------------|-------------------|----------------------------|
-|item                    |references         |null:false, foreign_key:true|
+|item               |references         |null:false, foreign_key:true|
 |user                    |references         |null:false, foreign_key:true|
 
 ###Association
 
 - belongs_to :user
 - belongs_to :item
-- has_one :item_delivery_content
+- has_one :address
 
-## item_delivery_contents
+## addresses テーブル
 |Column                   |Type              |Options                     |
 |-------------------------|------------------|----------------------------|
 |post_code                |string            |null:false                  |
@@ -58,8 +58,8 @@
 |town_number              |string            |null:false                  |
 |buildings_name           |string            |                            |
 |phone_number             |string            |null:false                  |
-|item_purchase_content    |references        |null:false, foreign_key:true|
+|order                    |references        |null:false, foreign_key:true|
 
 ###Association
 
--belongs_to: item_purchase_content
+-belongs_to: order
